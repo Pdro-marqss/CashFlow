@@ -15,7 +15,28 @@ public class RegisterExpenseUseCase
     private void Validate(RequestRegisterExpenseJson request)
     {
         var validator = new RegisterExpenseValidator();
-
         var result = validator.Validate(request);
+        var isValid = result.IsValid;
+        
+        if(isValid == false)
+        {
+            /*
+            * >> Fazendo a lista de erros usando Loop:
+            *
+            * var listaDeErros = new List<string>();
+            *
+            * result.Errors.ForEach(error =>
+            * {
+            *      listaDeErros.Add(error.ErrorMessage);
+            * });
+            */
+
+            // >> Fazendo a lista usando LINQ (queries sql para busca no c#):
+            var errorMessages = result.Errors
+            .Select(validationFailuire => validationFailuire.ErrorMessage)
+            .ToList();
+
+            throw new ArgumentException(errorMessages);
+        }
     }
 }
