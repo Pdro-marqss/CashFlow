@@ -1,5 +1,6 @@
 ﻿using CashFlow.Communication.Requests;
 using CashFlow.Communication.Responses;
+using CashFlow.Exception.ExceptionsBase;
 
 namespace CashFlow.Application.UseCases.Expenses.Register;
 
@@ -36,8 +37,7 @@ public class RegisterExpenseUseCase
             .Select(validationFailuire => validationFailuire.ErrorMessage)
             .ToList();
 
-            // TODO: Criar uma nova Exception para retornar uma lista de erros ao inves de uma string unica.
-            throw new ArgumentException(errorMessages);
+            throw new ErrorOnValidationException(errorMessages);
         }
     }
 }

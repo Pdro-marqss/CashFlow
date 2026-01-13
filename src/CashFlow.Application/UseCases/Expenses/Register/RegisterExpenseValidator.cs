@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using CashFlow.Communication.Requests;
-using CashFlow.Communication.Enums;
 
 namespace CashFlow.Application.UseCases.Expenses.Register;
 
