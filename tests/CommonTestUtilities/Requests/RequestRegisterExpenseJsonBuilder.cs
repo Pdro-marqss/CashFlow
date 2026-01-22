@@ -1,0 +1,28 @@
+﻿using Bogus;
+using CashFlow.Communication.Enums;
+using CashFlow.Communication.Requests;
+
+namespace CommonTestUtilities.Requests;
+
+public class RequestRegisterExpenseJsonBuilder
+{
+    public RequestRegisterExpenseJson Build()
+    {
+        // Podemos utilizar de duas formas, a primeira:
+        //var faker = new Faker();
+
+        //var request = new RequestRegisterExpenseJson
+        //{
+        //    Title = faker.Commerce.ProductName(),
+        //    Date = faker.Date.Past()
+        //};
+
+        // Ou a segunda:
+        return new Faker<RequestRegisterExpenseJson>()
+            .RuleFor(request => request.Title, faker => faker.Commerce.ProductName())
+            .RuleFor(request => request.Description, faker => faker.Commerce.ProductDescription())
+            .RuleFor(request => request.Date, faker => faker.Date.Past())
+            .RuleFor(request => request.PaymentType, faker => faker.PickRandom<PaymentType>())
+            .RuleFor(request => request.Amount, faker => faker.Random.Decimal(min: 1, max: 1000));
+    }
+}
