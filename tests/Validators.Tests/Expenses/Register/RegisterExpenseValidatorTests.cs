@@ -1,6 +1,6 @@
 ﻿using CashFlow.Application.UseCases.Expenses.Register;
-using CashFlow.Communication.Requests;
 using CommonTestUtilities.Requests;
+using FluentAssertions;
 
 namespace Validators.Tests.Expenses.Register;
 
@@ -19,6 +19,7 @@ public class RegisterExpenseValidatorTests
         var result = validator.Validate(request);
 
         // 3. Assert - Verificando se o resultado da ação está de acordo com o esperado
-        Assert.True(result.IsValid);
+        // Assert.True(result.IsValid);
+        result.IsValid.Should().BeTrue();
     }
 }
